@@ -1,0 +1,51 @@
+﻿<Page
+    x:Class="LeShare.Views.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LeShare.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    
+    <Grid Margin="0,-23,0,0">
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/Images/BackGround.png"/>
+        </Grid.Background>
+        <StackPanel>
+            <TextBlock Text="关于" FontSize="48" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top"/>
+            <TextBlock FontSize="22" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top">
+            
+          <LineBreak/>   乐享是一款免费的账号分享软件                 
+         
+            <LineBreak/>  使用说明：   
+            <LineBreak/> 
+            由于软件开发初期还有什么不完善          
+            请大家见谅       
+            会员账户会不定期持续更新
+            账号数量有限，所以每次定量更新
+            请持续关注
+            如果账号大面积无法使用
+            请及时向开发者反馈
+                      <LineBreak/> 
+            <LineBreak/>  联系邮箱：admin@mepstudio.cn
+            <LineBreak/>
+            <LineBreak/>
+            </TextBlock>
+        </StackPanel>
+        <StackPanel VerticalAlignment="Bottom" Margin="0,0,0,48">
+            <TextBlock x:Name="AppVersion" FontSize="18" HorizontalAlignment="Center"/>
+            <TextBlock Text="开发者：MEP Studio" FontSize="18" HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <Button x:Name="button2" Content="免责声明" BorderThickness="0" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,10"  >
+            <Button.Flyout>
+                <Flyout>
+                    <StackPanel>
+                        <TextBlock Text="乐享仅供大家分享学习使用,请不要将账户或软件用于非法途径,开发者不负任何法律责任！" FontSize="18" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Flyout>
+            </Button.Flyout>
+        </Button>
+    </Grid>
+</Page>

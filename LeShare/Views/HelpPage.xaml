@@ -1,0 +1,35 @@
+﻿<Page
+    x:Class="LeShare.Views.HelpPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LeShare.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Margin="0,-23,0,0" Padding="0,20,0,0">
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/Images/BackGround.png"/>
+        </Grid.Background>
+        <StackPanel>
+            <TextBlock Text="帮助" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0"/>
+            <TextBlock FontSize="24" Margin="10,48,10,0" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" >
+            使用方式
+            <LineBreak/>
+            <LineBreak/>
+       1.选择一个支持的软件点击进入
+            <LineBreak/>
+            <LineBreak/>
+           
+       2.点击广告进入账号获取页面后，点击下方蓝色的“获取账号”按钮
+            <LineBreak/>     
+            <LineBreak/>
+       3.等待显示连接服务器成功
+            <LineBreak/>
+            <LineBreak/>
+       4.上下滑动选择一个账号和密码，双击屏幕或长按进行复制
+            <LineBreak/>
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</Page>

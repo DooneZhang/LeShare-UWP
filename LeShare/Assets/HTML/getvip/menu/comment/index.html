@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>留言板</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="user-scalable=no">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1">
+  <link rel="stylesheet" href="../../common/style.css">
+  <style type="text/css">
+  body {
+	background-color: #FFC;
+}
+  </style>
+</head>
+
+<body>
+  <h1>留言板</h1>
+  <div class="item">
+    <p align="center"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 有什么疑问和讨论可以在这里</p>
+  </div>
+ 
+  <div class="item">
+    <div id="print-wall" class="print-wall"></div>
+  </div>
+  
+  <div class="item">
+    <!--起昵称-->
+     <label>请输入昵称：</label> 
+    <input type="text" autofocus id="input-name">  
+    
+    <div id="open-btn" class="btn">连接留言板</div>
+  </div>
+  
+  
+  <!--发送文字及按钮 -->
+<div class="item">
+  <div align="center">输入留言内容：    </div>
+    
+      <div align="center">
+        <input type="text" class="input-send" id="input-send" value="">
+      </div>
+  </div>
+    
+    
+    <div id="send-btn" class="btn">
+      <div align="center">发表留言</div>
+    </div>
+
+<div align="center"><!-- <div id="send-btn-as-file" class="btn">作为文件发送</div>> 
+  
+
+  <!-- 引入 LeanCloud 存储 SDK -->
+      <script src="../../common/av-min-1.0.0.js"></script>
+      
+      <!-- 引入 LeanCloud 实时通信 SDK -->
+      <script src="../../common/realtime.browser.js"></script>
+      
+      <!-- 引入 LeanCloud 实时通讯 TypedMessages -->
+      <script src="../../common/typed-messages.js"></script>
+      
+      <!-- Demo 逻辑文件 -->
+      <script src="test.js"></script>
+</div>
+</body>
+</html>

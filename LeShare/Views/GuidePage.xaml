@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="LeShare.Views.GuidePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LeShare.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <FlipView >
+            <PivotItem Background="#FF52C3FD">
+                <Image Source="ms-appx:///Assets/images/Guide/1.jpg" />
+            </PivotItem>
+            <PivotItem Background="#FF80FFB2">
+                <Image Source="ms-appx:///Assets/images/Guide/2.jpg"/>
+            </PivotItem>
+            <PivotItem Background="#FFEB356E">
+                <Image Source="ms-appx:///Assets/images/Guide/3.jpg"/>
+            </PivotItem>
+            <PivotItem Background="#FFCF94F2">
+                <Grid>
+                    <Image Source="ms-appx:///Assets/images/Guide/4.jpg"/>
+                    <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20" Click="Enter_Click" BorderThickness="0" Width="200" Height="100">
+                        <Button.Background>
+                            <ImageBrush Stretch="Uniform" ImageSource="/Assets/Buttons/Enter.png" />
+                        </Button.Background>
+                    </Button>
+                </Grid>
+            </PivotItem>
+
+        </FlipView>
+    </Grid>
+</Page>

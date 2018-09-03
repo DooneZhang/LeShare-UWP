@@ -1,0 +1,18 @@
+﻿<Page
+    x:Class="LeShare.Views.SplashPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LeShare.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/Images/BackGround.png"/>
+        </Grid.Background>
+
+        <TextBlock Text="3秒自动跳转" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="#FF31E8CF"/>
+    </Grid>
+</Page>

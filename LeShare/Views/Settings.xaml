@@ -1,0 +1,57 @@
+﻿<Page
+    x:Class="LeShare.Views.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LeShare.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Margin="0,-23,0,0">
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/Images/BackGround.png"/>
+        </Grid.Background>
+
+        <StackPanel>
+            <StackPanel  Grid.ColumnSpan="2"  >
+                <TextBlock FontSize="48" Height="Auto" Text="设置" HorizontalAlignment="Center" Margin="0,15,0,0"   />
+            </StackPanel>
+            <StackPanel>
+                <ListView  Grid.Column="1" Margin="20,0,0,0" HorizontalAlignment="Center"  >
+                    <StackPanel Height="70" Width="370" Orientation="Horizontal" Tapped="Help_Tapped">
+                        <Image Source="ms-appx:///Assets/Image/Button/Files.png" Height="31" VerticalAlignment="Top" Width="41" Margin="0,10,0,0"/>
+                        <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text=" 帮助" Height="70" FontSize="36" Width="320"/>
+                    </StackPanel>
+                    <StackPanel Height="70" Width="370" Orientation="Horizontal" Tapped="Push_Tapped">
+                        <Image Source="Assets/Image/Button/Tag.png" Height="31" VerticalAlignment="Top" Width="41" Margin="0,10,0,0"/>
+                        <TextBlock x:Name="textBlock9" TextWrapping="Wrap" Text=" 提醒" Height="70" FontSize="36" Width="320"/>
+                    </StackPanel>
+                    <StackPanel Height="70" Width="370" Orientation="Horizontal" Tapped="FeedBack_Tapped" >
+                        <Image Source="ms-appx:///Assets/Image/Button/Message.png" Height="31" VerticalAlignment="Top" Width="41" Margin="0,10,0,0"/>
+                        <TextBlock x:Name="textBlock3" TextWrapping="Wrap" Text=" 反馈" Height="70" FontSize="36" Width="320"/>
+                    </StackPanel>
+
+                    <StackPanel Height="70" Width="370" Orientation="Horizontal" Tapped="Privacy_Tapped"  >
+                        <Image Source="ms-appx:///Assets/Image/Button/Shield.png" Height="31" VerticalAlignment="Top" Width="41" Margin="0,10,0,0"/>
+                        <TextBlock x:Name="textBlock5" TextWrapping="Wrap" Text=" 隐私" Height="70" FontSize="36" Width="320"/>
+                    </StackPanel>
+
+                    <StackPanel Height="70" Width="370" Orientation="Horizontal" Tapped="About_Tapped">
+                        <Image Source="ms-appx:///Assets/Image/Button/Information.png" Height="31" VerticalAlignment="Top" Width="41" Margin="0,10,0,0"/>
+                        <TextBlock x:Name="textBlock6" TextWrapping="Wrap" Text=" 关于" Height="70" FontSize="36" Width="320"/>
+                    </StackPanel>
+
+                    <StackPanel Height="70" Width="370" Orientation="Horizontal" Tapped="Assess_Tapped">
+                        <Image Source="Assets/Image/Button/Assess.png" Height="31" VerticalAlignment="Top" Width="41" Margin="0,10,0,0"/>
+                        <TextBlock x:Name="textBlock7" TextWrapping="Wrap" Text=" 好评" Height="70" FontSize="36" Width="320"/>
+                    </StackPanel>
+
+                    <StackPanel Height="70" Width="370" Orientation="Horizontal" Tapped="More_Tapped">
+                        <Image Source="Assets/Image/Button/More.png" Height="31" VerticalAlignment="Top" Width="41" Margin="0,10,0,0"/>
+                        <TextBlock x:Name="textBlock8" TextWrapping="Wrap" Text=" 更多软件" Height="70" FontSize="36" Width="320"/>
+                    </StackPanel>
+                </ListView>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
