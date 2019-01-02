@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -27,8 +29,9 @@ namespace LeShare.Views
         {
             this.InitializeComponent();
         }
+        private StatusBar statusbar;
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             switch (Menu.name)
             {
@@ -75,16 +78,28 @@ namespace LeShare.Views
                 //会员体验活动
                 case "Sales": WebSite.Navigate(new Uri("http://s.moreplay.cn/index.php?c=list&sortid=3&page=1")); break;
                 //下载破解百度云
-                case "PJ_BaiduYun": WebSite.Navigate(new Uri("http://s.moreplay.cn/index.php?c=read&id=29&page=1")); break;
+                case "PJ_BaiduYun": WebSite.Navigate(new Uri("http://s.moreplay.cn/index.php?c=list&sortid=2&page=1")); break;
                 //下载破解迅雷
-                case "PJ_Thunder": WebSite.Navigate(new Uri("http://s.moreplay.cn/index.php?c=read&id=30&page=1")); break;
+                case "PJ_Thunder": WebSite.Navigate(new Uri("http://s.moreplay.cn/index.php?c=list&sortid=2&page=1")); break;
                 //下载破解爱奇艺
-                case "PJ_Iqiyi": WebSite.Navigate(new Uri("http://s.moreplay.cn/index.php?c=list&sortid=15&page=1")); break;
+                case "PJ_Iqiyi": WebSite.Navigate(new Uri("http://s.moreplay.cn/index.php?c=list&sortid=2&page=1")); break;
                 //下载破解优酷
-                case "PJ_YouKu": WebSite.Navigate(new Uri("http://s.moreplay.cn/index.php?c=list&sortid=15&page=1")); break;
+                case "PJ_YouKu": WebSite.Navigate(new Uri("http://s.moreplay.cn/index.php?c=list&sortid=2&page=1")); break;
                 //下载破解播放器
-                case "PJ_Player": WebSite.Navigate(new Uri("http://s.moreplay.cn/index.php?c=list&sortid=15&page=1")); break;               
+                case "PJ_Player": WebSite.Navigate(new Uri("http://s.moreplay.cn/index.php?c=list&sortid=2&page=1")); break;               
             }
-        }
+       
+       
+            // 判断是否存在 StatusBar
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            {
+                //静态方法取得当前 StatusBar 实例
+                statusbar = StatusBar.GetForCurrentView();
+
+                //显示状态栏
+                await statusbar.HideAsync();
+            }
+        
+    }
     }
 }

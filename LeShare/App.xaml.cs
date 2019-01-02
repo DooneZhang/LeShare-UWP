@@ -1,6 +1,9 @@
 ﻿using LeShare.Views;
+using Microsoft.Services.Store.Engagement;
+using Microsoft.WindowsAzure.Messaging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -8,6 +11,10 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Networking.PushNotifications;
+using Windows.Security.ExchangeActiveSyncProvisioning;
+using Windows.Storage;
+using Windows.System.Profile;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -34,12 +41,61 @@ namespace LeShare
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
-            if (Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
+            //如果是移动设备显示按钮
+            if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
             {
                 Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             }
+            
+           // Debug.WriteLine(Info.SystemFamily+ Info.SystemVersion + Info.SystemArchitecture + Info.ApplicationVersion + Info.DeviceManufacturer +Info.DeviceModel);
+
+            //上传自定义事件
+            StoreServicesCustomEventLogger logger = StoreServicesCustomEventLogger.GetDefault();
+            logger.Log(Info.SystemFamily + Info.SystemVersion);
+            logger.Log(Info.SystemArchitecture);
+            logger.Log(Info.ApplicationVersion);
+            logger.Log(Info.DeviceManufacturer+ Info.DeviceModel);
+
         }
 
+        public static class Info
+        {
+            public static string SystemFamily { get; }
+            public static string SystemVersion { get; }
+            public static string SystemArchitecture { get; }
+            public static string ApplicationVersion { get; }
+            public static string DeviceManufacturer { get; }
+            public static string DeviceModel { get; }
+
+            static Info()
+            {
+                // get the system family name
+                AnalyticsVersionInfo ai = AnalyticsInfo.VersionInfo;
+                SystemFamily = ai.DeviceFamily;
+
+                // get the system version number
+                string sv = AnalyticsInfo.VersionInfo.DeviceFamilyVersion;
+                ulong v = ulong.Parse(sv);
+                ulong v1 = (v & 0xFFFF000000000000L) >> 48;
+                ulong v2 = (v & 0x0000FFFF00000000L) >> 32;
+                ulong v3 = (v & 0x00000000FFFF0000L) >> 16;
+                ulong v4 = (v & 0x000000000000FFFFL);
+                SystemVersion = $"{v1}.{v2}.{v3}.{v4}";
+
+                // get the package architecure
+                Package package = Package.Current;
+                SystemArchitecture = package.Id.Architecture.ToString();
+
+                // get the app version
+                PackageVersion pv = package.Id.Version;
+                ApplicationVersion = $"{pv.Major}.{pv.Minor}.{pv.Build}.{pv.Revision}";
+
+                // get the device manufacturer and model name
+                EasClientDeviceInformation eas = new EasClientDeviceInformation();
+                DeviceManufacturer = eas.SystemManufacturer;
+                DeviceModel = eas.SystemProductName;
+            }
+        }
         private async void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e)
         {
             var rootFrame = Window.Current.Content as Frame;
@@ -76,6 +132,9 @@ namespace LeShare
         /// <param name="e">有关启动请求和过程的详细信息。</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            //调用Azure推送添加到新的InitNotificationsAsync方法
+            InitNotificationsAsync();
+
             //返回键
             SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
 
@@ -153,6 +212,54 @@ namespace LeShare
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: 保存应用程序状态并停止任何后台活动
             deferral.Complete();
+        }
+
+        //Azure推送
+        public static async void InitNotificationsAsync()
+        {
+            ApplicationDataContainer settings = ApplicationData.Current.LocalSettings;
+            //获取本地应用设置容器
+            //如果存在Push_Enable这个键再判断
+            try
+            {
+                if (settings.Values.ContainsKey("Push_Enable"))
+                {
+                    var hub_name = "LeShare_Push";
+                    var DefaultListenSharedAccessSignature = "Endpoint=sb://leshare.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=u40pX6RbtkmBIAJq55tuKieMU3lKucYEn0hJi4Y4inI=";
+                    //注册推送通知
+                    var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+                    var hub = new NotificationHub(hub_name, DefaultListenSharedAccessSignature);
+
+                    //判断是否打开推送开关,如何打开则显示开并且注册推送通知,否则关闭
+                    if ((bool)settings.Values["Push_Enable"] == true)
+                    {
+                        //上传注册的通道
+                        var result = await hub.RegisterNativeAsync(channel.Uri);
+                    }else
+                    {
+                        //关闭通道
+                        channel.Close();
+                    }
+                }else
+                {
+                    //如果不存在Push_Enable这个键就说明默认没有打开接收通知，无需注册通知通道
+                    settings.Values["Push_Enable"] = false;
+                }
+            }catch
+            {
+                /*
+                var dialog = new MessageDialog("网络异常!请检查网络" );
+                await dialog.ShowAsync();
+                */
+            }
+            /*显示注册成功的id标识
+            if (result.RegistrationId != null)
+            {
+                var dialog = new MessageDialog("Registration successful: " + result.RegistrationId);
+                dialog.Commands.Add(new UICommand("OK"));
+                await dialog.ShowAsync();
+            }
+            */
         }
     }
 }

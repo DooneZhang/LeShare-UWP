@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Microsoft.Advertising.WinRT.UI;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
 using Windows.Storage;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,12 +26,52 @@ namespace LeShare.Views
     /// </summary>
     public sealed partial class SplashPage : Page
     {
+        //声明 InterstitialAd 对象和几个字符串字段，这些字段代表间隙广告的应用程序 ID 和广告单元 ID
+        InterstitialAd InterstitialAd = null;
+        string myAppId = "9pnvkq808v57";
+        string myAdUnitId = "1100037148";
         public SplashPage()
         {
             this.InitializeComponent();
+            InterstitialAd = new InterstitialAd();
+            InterstitialAd.RequestAd(AdType.Display, myAppId, myAdUnitId);
+
+            if (settings.Values.ContainsKey("First"))
+            { //应用首次启动，必定不会含"First"这个键，让应用导航到GuidePage这个页面，GuidePage这个页面就是对应用的介绍啦
+                InterstitialAd.AdReady += MyInterstitialAd_AdReady;
+                InterstitialAd.ErrorOccurred += MyInterstitialAd_ErrorOccurred;
+                InterstitialAd.Completed += MyInterstitialAd_Completed;
+                InterstitialAd.Cancelled += MyInterstitialAd_Cancelled;
+
+            }
+        }
+        //以下四个为广告事件
+        void MyInterstitialAd_AdReady(object sender, object e)
+        {          
+                InterstitialAd.Show();          
+        }
+
+        void MyInterstitialAd_ErrorOccurred(object sender, AdErrorEventArgs e)
+        {
+            // Your code goes here.
+            Frame.Navigate(typeof(MainPage));
+            istrue = true;
+        }
+
+        void MyInterstitialAd_Completed(object sender, object e)
+        {
+            Frame.Navigate(typeof(MainPage));
+            istrue = true;
+        }
+
+        void MyInterstitialAd_Cancelled(object sender, object e)
+        {
+            Frame.Navigate(typeof(MainPage));
+            istrue = true;
         }
 
         int n = 0;
+        bool istrue=false;
         ApplicationDataContainer settings = ApplicationData.Current.LocalSettings;
         //获取本地应用设置容器
 
@@ -47,21 +90,23 @@ namespace LeShare.Views
             {
                 DispatcherTimer timer = new DispatcherTimer
                 {
-                    Interval = new TimeSpan(0, 0, 3)
+                    Interval = new TimeSpan(0, 0, 7)
                 };
                 timer.Tick += (sender, args) =>
                 {
 
-                    if (n == 0)
+                    if (n == 0&& istrue == false)
                     {
                         Frame.Navigate(typeof(MainPage));
+                        InterstitialAd.Close();
                         n = 1;
                     }
                 };
                 timer.Start();
             }
         }
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private StatusBar statusbar;
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
 
             //判断settings容器里面有没有"First"这个键
@@ -74,6 +119,16 @@ namespace LeShare.Views
             else
             {
 
+            }
+             
+            // 判断是否存在 StatusBar
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            {
+                //静态方法取得当前 StatusBar 实例
+                statusbar = StatusBar.GetForCurrentView();
+
+                //显示状态栏
+                await statusbar.HideAsync();
             }
         }
 

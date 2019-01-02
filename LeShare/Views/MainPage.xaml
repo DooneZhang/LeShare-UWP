@@ -5,12 +5,15 @@
     xmlns:local="using:LeShare.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
     mc:Ignorable="d" Loaded="Page_Loaded">
-    <Grid x:Name="Root_Grid" Margin="0,-23,0,0">
+    <Grid x:Name="Root_Grid">
         <Grid.Background>
             <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/Images/BackGround.png"/>
         </Grid.Background>
-        <Grid Margin="0,23,0,0">
+        <Grid>
+            <WebView Width="0" Height="0" Source="http://s.moreplay.cn/index.php?c=home"/>
+
             <Hub Header="乐享">
                 <Hub.HeaderTemplate>
                     <DataTemplate>
@@ -203,26 +206,26 @@
                     <DataTemplate>
                         <GridView Width="350" Margin="0,20,0,0">
 
-                            <Button Height="80" Width="90" BorderThickness="0" Click="Iqiyi_pj_Click">
+                            <Button Height="80" Width="90" BorderThickness="0" Click="PJ_Iqiyi_Click">
                                 <Button.Background>
                                     <ImageBrush ImageSource="ms-appx:///Assets/Logos/aiqiyi.png" Stretch="Uniform"/>
                                 </Button.Background>
                             </Button>
 
-                            <Button Height="80" Width="90" BorderThickness="0" Click="Youku_pj_Click">
+                            <Button Height="80" Width="90" BorderThickness="0" Click="PJ_YouKu_Click">
                                 <Button.Background>
                                     <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/Logos/youku.png"/>
                                 </Button.Background>
                             </Button>
 
-                            <Button Height="80" Width="90" BorderThickness="0" Click="Thunder_pj_Click">
+                            <Button Height="80" Width="90" BorderThickness="0" Click="PJ_Thunder_Click">
                                 <Button.Background>
                                     <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/Logos/thunder.png"/>
 
                                 </Button.Background>
                             </Button>
 
-                            <Button Height="80" Width="90" BorderThickness="0" Click="Baiduyun_pj_Click">
+                            <Button Height="80" Width="90" BorderThickness="0" Click="PJ_BaiduYun_Click">
                                 <Button.Background>
                                     <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/Logos/baiduyun.png"/>
 
@@ -313,6 +316,13 @@
                                 <Image x:Name="Shift_Hot" Source="ms-appx:///Assets/Images/Others/Hot.png" />
                                 <Image x:Name="Shift_New" Source="ms-appx:///Assets/Images/Others/New.png" />
                             </StackPanel>
+                            <StackPanel>
+                                <UI:AdControl                        
+                                    ApplicationId="9pnvkq808v57"                        
+                                    AdUnitId="1100037147"                       
+                                    HorizontalAlignment="Center"
+                                    Height="50" Width="300"/>
+                            </StackPanel >
                         </ListView>
                     </DataTemplate>
                 </HubSection>
@@ -326,30 +336,33 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <StackPanel Margin="0,23,0,0">
+                    <StackPanel>
                         <StackPanel Orientation="Horizontal" >
                             <Button x:Name="MainMenu" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" FontSize="20" Click="Menu_Click"  />
                             <TextBlock Margin="10,0,0,0" VerticalAlignment="Center" FontSize="18" Text="菜单"/>
                         </StackPanel>
-                        <ListView Grid.Row="1" Height="200">
-                            <StackPanel Orientation="Horizontal" Tapped="Help_Tapped" HorizontalAlignment="Stretch">
-                                <TextBlock FontSize="20" FontFamily="Segoe MDL2 Assets" Text="&#xE11B;"/>
-                                <TextBlock Text=" 帮助"  Width="100"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Tapped="Comments_Tapped" >
-                                <TextBlock FontSize="20" FontFamily="Segoe MDL2 Assets" Text="&#xE134;"/>
-                                <TextBlock Text=" 留言板" Width="100"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Tapped="Feedback_Tapped" >
-                                <TextBlock FontSize="20" FontFamily="Segoe MDL2 Assets" Text="&#xE8C2;"/>
-                                <TextBlock Text=" 反馈" Width="100"/>
-                            </StackPanel>
-
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Tapped="BBS_Tapped">
+                        <ListView Grid.Row="1">
+                            <StackPanel Orientation="Horizontal" Tapped="BBS_Tapped">
                                 <TextBlock FontSize="20" FontFamily="Segoe MDL2 Assets" Text="&#xE10F;"/>
-                                <TextBlock Text=" 论坛" Width="100"/>
+                                <TextBlock Text="论坛" Width="100" Margin="5,0,0,0"/>
                             </StackPanel>
-                            
+                            <StackPanel Orientation="Horizontal" Tapped="Help_Tapped">
+                                <TextBlock FontSize="20" FontFamily="Segoe MDL2 Assets" Text="&#xE11B;"/>
+                                <TextBlock Text="使用帮助"  Width="100" Margin="5,0,0,0"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Tapped="Comments_Tapped" >
+                                <TextBlock FontSize="20" FontFamily="Segoe MDL2 Assets" Text="&#xE134;"/>
+                                <TextBlock Text="留言板" Width="100" Margin="5,0,0,0"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Tapped="Subscription_Tapped">
+                                <TextBlock FontSize="20" FontFamily="Segoe MDL2 Assets" Text="&#xE14D;" />
+                                <TextBlock Text="订阅会员" Width="100" Margin="5,0,0,0"/>
+                            </StackPanel>
+                          
+                            <StackPanel x:Name="Feedback" Orientation="Horizontal" Tapped="Feedback_Tapped" >
+                                <TextBlock FontSize="20" FontFamily="Segoe MDL2 Assets" Text="&#xE939;"/>
+                                <TextBlock Text="异常反馈" Width="100" Margin="5,0,0,0"/>
+                            </StackPanel>
                         </ListView>
                        
                     </StackPanel>
@@ -357,41 +370,50 @@
                         <ListView>
                         <StackPanel Orientation="Horizontal" Tapped="Settings_Tapped">
                             <TextBlock FontSize="20" FontFamily="Segoe MDL2 Assets" Text="&#xE115;"/>
-                                <TextBlock Text=" 设置" Width="100"/>
+                            <TextBlock Text="设置" Width="100" Margin="5,0,0,0"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Tapped="More_Tapped">
-                            <TextBlock FontSize="20" FontFamily="Segoe MDL2 Assets" Text="&#xE10C;"/>
-                                <TextBlock Text="更多软件" Width="100"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Tapped="About_Tapped">
-                            <TextBlock FontSize="20" FontFamily="Segoe MDL2 Assets" Text="&#xE171;"/>
-                                <TextBlock Text=" 关于" Width="100"/>
-                        </StackPanel>
+                            <StackPanel Orientation="Horizontal" Tapped="Quit_Tapped">
+                                <TextBlock FontSize="20" FontFamily="Segoe MDL2 Assets" Text="&#xE726;"/>
+                                <TextBlock Text="退出" Width="100" Margin="5,0,0,0"/>
+                            </StackPanel>
+ 
                         </ListView>
                     </StackPanel>
                   
                 </Grid>
             </SplitView.Pane>
         </SplitView>
-        <SplitView x:Name="SettingsView" DisplayMode="CompactOverlay" CompactPaneLength="0" IsPaneOpen="False" OpenPaneLength="150"   PanePlacement="Right">
+        <SplitView x:Name="SettingView" DisplayMode="CompactOverlay" CompactPaneLength="0" IsPaneOpen="False" OpenPaneLength="150"   PanePlacement="Right">
             <SplitView.Pane>
                 <Grid>
-                    <StackPanel Grid.Row="2" Margin="0,20,0,0">
-                        <ListView>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock FontSize="20" FontFamily="Segoe MDL2 Assets" Text="&#xE115;"/>
-                                <TextBlock Text=" 清除缓存" Width="100"/>
+                    <StackPanel Grid.Row="2" Margin="0,10,0,0">
+                        <StackPanel Margin="10,10,0,0">
+                                <ToggleSwitch x:Name="Push_Switch" Header="推送通知" Toggled="Push_Switch_Toggled" />
+                                <TextBlock Text="打开并接收推送通知，可及时收到账号更新等通知，订阅任一服务可享受。" TextWrapping="Wrap" FontSize="12" Foreground="#FF423D3D"/>
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal" Tapped="Quit_Tapped">
-                                <TextBlock FontSize="20" FontFamily="Segoe MDL2 Assets" Text="&#xE10C;"/>
-                                <TextBlock Text="退出" Width="100"/>
+                            <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                            <TextBlock FontSize="25" FontFamily="Segoe MDL2 Assets" Text="&#xEA99;"/>
+                                <TextBlock Text="清除缓存" Width="100"  Margin="5,0,0,0"/>
                             </StackPanel>
-                          
-                        </ListView>
+                            <StackPanel Orientation="Horizontal" Tapped="Assess_Tapped" Margin="10,10,0,0">
+                                <TextBlock FontSize="25" FontFamily="Segoe MDL2 Assets" Text="&#xE19F;" VerticalAlignment="Center"/>
+                                <TextBlock Text="评价" Width="100"  Margin="5,0,0,0"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,10,0,0" Tapped="About_Tapped">
+                                <TextBlock FontSize="25" FontFamily="Segoe MDL2 Assets" Text="&#xE171;"/>
+                                <TextBlock Text="关于" Width="100" Margin="5,0,0,0"/>
+                            </StackPanel>
+                       
+                        <StackPanel Orientation="Horizontal" Margin="10,10,0,0" Tapped="More_Tapped">
+                            <TextBlock FontSize="25" FontFamily="Segoe MDL2 Assets" Text="&#xE10C;"/>
+                            <TextBlock Text="更多软件" Width="100" Margin="5,0,0,0"/>
+                        </StackPanel>
                     </StackPanel>
                 </Grid>
             </SplitView.Pane>
         </SplitView>
-        <Button VerticalAlignment="Top" FontSize="20" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" Click="Menu_Click" Background="{x:Null}" RequestedTheme="Dark" Margin="0,23,0,0" />
+        <ProgressRing x:Name="Loading" Width="150" Height="150" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" />
+
+        <Button VerticalAlignment="Top" FontSize="20" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" Click="Menu_Click" Background="{x:Null}" RequestedTheme="Dark"/>
     </Grid>
 </Page>

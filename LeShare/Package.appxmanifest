@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="9804d8fa-9cb6-45b2-95b0-3f642b62aacb" Publisher="CN=DoonZhang" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="9804d8fa-9cb6-45b2-95b0-3f642b62aacb" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="61665DoonZhang.530408C9297F2" Publisher="CN=CD55CB43-B041-4339-A2D1-A4C217509A12" Version="1.4.5.0" />
+  <mp:PhoneIdentity PhoneProductId="e28aac92-c6ac-4738-94c1-73501a0522af" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>乐享</DisplayName>
     <PublisherDisplayName>MEP Studio</PublisherDisplayName>

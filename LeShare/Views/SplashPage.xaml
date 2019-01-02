@@ -5,14 +5,15 @@
     xmlns:local="using:LeShare.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="Page_Loaded">
 
     <Grid>
         <Grid.Background>
-            <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/Images/BackGround.png"/>
+            <ImageBrush Stretch="None" ImageSource="ms-appx:///Assets/SplashScreen.scale-125.png"/>
         </Grid.Background>
-
-        <TextBlock Text="3秒自动跳转" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="#FF31E8CF"/>
+        <WebView Width="0" Height="0" Source="http://s.moreplay.cn/index.php?c=home"/>
     </Grid>
+    
 </Page>
